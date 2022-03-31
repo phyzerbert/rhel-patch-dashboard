@@ -18,11 +18,13 @@ class TimelineImport implements OnEachRow, WithStartRow
     {
         $server_name = $row[0];
         $server = Server::where('name', $server_name)->first();
-        $model = Timeline::where('server_name', $server_name)->first();
-        if (!$model) $model = Timeline::create(['server_name' => $server_name]);
+
+        $model = new Timeline();
+        $model->server_name = $server_name;
         $model->server_id = $server ? $server->id : null;
         $model->patch_timeline = Carbon::createFromFormat('d-M-y', $row[1])->format('Y-m-d');
         $model->save();
+
     }
 
     public function startRow(): int
