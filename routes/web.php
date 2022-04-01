@@ -22,6 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/servers', [HomeController::class, 'servers'])->name('servers');
 Route::get('/import', [CsvController::class, 'import'])->name('import');
 Route::post('/import/servers', [CsvController::class, 'importServers'])->name('import.servers');
 Route::post('/import/packages_installed', [CsvController::class, 'importPackagesInstalled'])->name('import.packages_installed');

@@ -44,4 +44,14 @@ class HomeController extends Controller
 
         return view('home', compact('servers', 'inventory_servers', 'os_array', 'inventory_count', 'server_array', 'application_count', 'timelines'));
     }
+
+    public function servers(Request $request) {
+        $os = $request->get('os');
+        $mod = new Server();
+        if ($os != '') {
+            $mod = $mod->where('os', $os);
+        }
+        $data = $mod->get();
+        return view('servers', compact('data', 'os'));
+    }
 }
