@@ -55,6 +55,7 @@
                         <table class="table table-flush" id="datatable-timeline">
                             <thead class="thead-light">
                                 <tr>
+                                    <th style="width: 50px;">#</th>
                                     <th>Hostname</th>
                                     <th>Patch Timeline</th>
                                 </tr>
@@ -62,8 +63,55 @@
                             <tbody>
                                 @foreach ($timelines as $item)
                                     <tr>
-                                        <td class="font-weight-normal">{{$item->server_name}}</td>
-                                        <td class="font-weight-normal">{{$item->patch_timeline}}</td>
+                                        <td class="font-weight-normal text-sm">{{$loop->index + 1}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->server_name}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->patch_timeline}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+            <div class="card z-index-2">
+                <div class="card-header p-3 pb-0">
+                    <h6>All Servers</h6>
+                </div>
+                <div class="card-body p-3">
+                    <div class="table-responsive">
+                        <table class="table table-flush" id="datatable-servers">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th style="width: 50px;">#</th>
+                                    <th>Name</th>
+                                    <th>Subscription Status</th>
+                                    <th>Installable Updates - Security</th>
+                                    <th>Installable Updates - Bug Fixes</th>
+                                    <th>Installable Updates - Enhancements</th>
+                                    <th>Installable Updates - Package Count</th>
+                                    <th>Environment</th>
+                                    <th>Content View</th>
+                                    <th>Regisered</th>
+                                    <th>Last Checkin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($servers as $item)
+                                    <tr>
+                                        <td class="font-weight-normal text-sm">{{$loop->index + 1}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->name}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->subscription_status}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->installable_updates_security}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->installable_updates_bug_fixes}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->installable_updates_enhancements}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->installable_updates_package_count}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->environment}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->content_view}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->registered}}</td>
+                                        <td class="font-weight-normal text-sm">{{$item->last_checkin}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -199,6 +247,10 @@
     {{-- DataTables --}}
     <script>
         const dataTableTimeline = new simpleDatatables.DataTable("#datatable-timeline", {
+            searchable: true,
+            fixedHeight: true
+        });
+        const dataTableServers = new simpleDatatables.DataTable("#datatable-servers", {
             searchable: true,
             fixedHeight: true
         });

@@ -39,7 +39,8 @@ class HomeController extends Controller
         }
 
         $timelines = Timeline::all();
+        $servers = Server::all();
 
-        return view('home', compact('os_array', 'inventory_count', 'server_array', 'application_count', 'timelines'));
+        return view('home', compact('servers', 'os_array', 'inventory_count', 'server_array', 'application_count', 'timelines'));
     }
 }
