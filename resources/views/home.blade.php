@@ -216,6 +216,9 @@
                     let _index = item[0].index
                     let labels = {!! json_encode($os_array) !!}
                     window.location.href = `/servers?os=${labels[_index]}`
+                },
+                onHover: (event, item) => {
+                    item.length > 0 ? event.chart.canvas.style.cursor = 'pointer' : event.chart.canvas.style.cursor = 'default';
                 }
             },
         });
