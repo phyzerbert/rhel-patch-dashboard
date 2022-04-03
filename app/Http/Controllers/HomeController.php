@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Server;
+use App\Models\Site;
 use App\Models\Timeline;
 use Illuminate\Http\Request;
 
@@ -46,12 +47,23 @@ class HomeController extends Controller
     }
 
     public function servers(Request $request) {
+        $site_id = $request->get('site_id');
         $os = $request->get('os');
         $mod = new Server();
         if ($os != '') {
             $mod = $mod->where('os', $os);
         }
-        $data = $mod->get();
-        return view('servers', compact('data', 'os'));
+        if ($site_id != '') {
+            $mod = $mod->where('site_id', $site_id);
+        }
+        $data = $mod->paginate(10);
+        $sites = Site::all();
+        return view('servers', compact('data', 'sites', 'os', 'site_id'));
+    }
+
+    public function changeServerSite(Request $request) {
+        $server = Server::find($request->get('server_id'));
+        $server->update(['site_id' => $request->get('site_id')]);
+        return response()->json($server);
     }
 }

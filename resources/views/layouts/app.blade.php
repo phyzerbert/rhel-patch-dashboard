@@ -20,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('assets/css/argon-dashboard.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
     @yield('style')
 </head>
@@ -39,6 +40,8 @@
     <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/toastr/toastr.min.js')}}"></script>
 
     @yield('script')
 
@@ -50,7 +53,50 @@
             }
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
     <script src="{{asset('assets/js/argon-dashboard.min.js')}}"></script>
+
+    <script>
+        var notification = '{{ session()->get("success")}}';
+        if(notification != ''){
+            toastr_call("success", "Success", notification);
+        }
+        var errors_string = '<?php echo json_encode($errors->all()); ?>';
+        errors_string=errors_string.replace("[","").replace("]","").replace(/\"/g,"");
+        var errors = errors_string.split(",");
+        if (errors_string != "") {
+            for (let i = 0; i < errors.length; i++) {
+                const element = errors[i];
+                toastr_call("error", "Error", element);
+            }
+        }
+
+        function toastr_call(type, title, msg, override){
+            toastr[type](msg, title, override);
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        }
+    </script>
 </body>
 </html>

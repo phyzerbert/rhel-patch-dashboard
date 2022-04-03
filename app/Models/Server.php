@@ -15,4 +15,8 @@ class Server extends Model
     public function application() {
         return $this->hasOne(Application::class);
     }
+
+    public function site() {
+        return $this->belongsTo(Site::class);
+    }
 }

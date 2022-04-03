@@ -15,7 +15,7 @@
             <li class="nav-item">
                 <a class="nav-link @if($route == 'home') active @endif" href="{{route('home')}}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-shop text-dark text-sm"></i>
+                        <i class="fa fa-dashboard text-dark text-sm"></i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
@@ -23,9 +23,25 @@
             <li class="nav-item">
                 <a class="nav-link @if($route == 'import') active @endif" href="{{route('import')}}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-cloud-upload-96 text-dark text-sm"></i>
+                        <i class="fa fa-file-csv text-dark text-sm"></i>
                     </div>
                     <span class="nav-link-text ms-1">Import CSV</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if($route == 'servers') active @endif" href="{{route('servers')}}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-server text-dark text-sm"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Servers</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if($route == 'sites') active @endif" href="{{route('sites')}}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-globe-americas text-dark text-sm"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Sites</span>
                 </a>
             </li>
         </ul>
