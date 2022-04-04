@@ -32,6 +32,7 @@ Route::get('/import', [CsvController::class, 'import'])->name('import');
 Route::post('/import/servers', [CsvController::class, 'importServers'])->name('import.servers');
 Route::post('/import/packages_installed', [CsvController::class, 'importPackagesInstalled'])->name('import.packages_installed');
 Route::post('/import/timeline', [CsvController::class, 'importTimeline'])->name('import.timeline');
+Route::post('/import/sites', [CsvController::class, 'importSites'])->name('import.sites');
 
 Route::get('/sites', [SiteController::class, 'index'])->name('sites');
 

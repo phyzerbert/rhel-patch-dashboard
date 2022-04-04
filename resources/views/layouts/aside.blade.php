@@ -57,7 +57,7 @@
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-calendar text-dark text-sm"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Patche Scheduler</span>
+                    <span class="nav-link-text ms-1">Patch Scheduler</span>
                 </a>
             </li>
         </ul>

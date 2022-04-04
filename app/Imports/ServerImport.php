@@ -30,12 +30,12 @@ class ServerImport implements OnEachRow, WithStartRow
         $model->content_view = $row[8];
         $model->registered = Carbon::createFromFormat('Y-m-d H:i:s e', $row[9]);
         $model->last_checkin = Carbon::createFromFormat('Y-m-d H:i:s e', $row[10]);
-        $site_name = $row[11];
-        if ($site_name) {
-            $site = Site::where('name', $site_name)->first();
-            if (!$site) $site = Site::create(['name' => $site_name]);
-            $model->site_id = $site->id;
-        }
+        // $site_name = $row[11];
+        // if ($site_name) {
+        //     $site = Site::where('name', $site_name)->first();
+        //     if (!$site) $site = Site::create(['name' => $site_name]);
+        //     $model->site_id = $site->id;
+        // }
 
         $model->save();
     }

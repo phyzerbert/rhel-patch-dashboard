@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\PackagesInstalledImport;
 use App\Imports\ServerImport;
+use App\Imports\SiteImport;
 use App\Imports\TimelineImport;
 use Illuminate\Http\Request;
 use Excel;
@@ -35,6 +36,14 @@ class CsvController extends Controller
             'file' => 'file',
         ]);
         Excel::import(new PackagesInstalledImport(), request()->file('file'));
+        return back()->with('success', 'Uploaded successfully');
+    }
+
+    public function importSites(Request $request) {
+        $request->validate([
+            'file' => 'file',
+        ]);
+        Excel::import(new SiteImport(), request()->file('file'));
         return back()->with('success', 'Uploaded successfully');
     }
 }
