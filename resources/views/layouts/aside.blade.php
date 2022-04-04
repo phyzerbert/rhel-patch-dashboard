@@ -44,6 +44,22 @@
                     <span class="nav-link-text ms-1">Sites</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @if(strpos($route, 'events') !== false) active @endif" href="{{route('events')}}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-calendar-alt text-dark text-sm"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Events</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if(strpos($route, 'patches') !== false) active @endif" href="{{route('patches')}}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-calendar text-dark text-sm"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Patche Scheduler</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

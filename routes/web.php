@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CsvController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PatchController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,21 @@ Route::post('/import/packages_installed', [CsvController::class, 'importPackages
 Route::post('/import/timeline', [CsvController::class, 'importTimeline'])->name('import.timeline');
 
 Route::get('/sites', [SiteController::class, 'index'])->name('sites');
-Route::post('/sites/save', [SiteController::class, 'save'])->name('sites.save');
-Route::post('/sites/update', [SiteController::class, 'update'])->name('sites.update');
-Route::get('/sites/delete/{id}', [SiteController::class, 'delete'])->name('sites.delete');
+
+Route::group(['prefix' => 'events'], function($router) {
+    $router->get('/', [EventController::class, 'index'])->name('events');
+    $router->get('/create', [EventController::class, 'create'])->name('events.create');
+    $router->post('/store', [EventController::class, 'store'])->name('events.store');
+    $router->get('/edit/{id}', [EventController::class, 'edit'])->name('events.edit');
+    $router->post('/update', [EventController::class, 'update'])->name('events.update');
+    $router->get('/delete/{id}', [EventController::class, 'delete'])->name('events.delete');
+});
+
+Route::group(['prefix' => 'patches'], function($router) {
+    $router->get('/', [PatchController::class, 'index'])->name('patches');
+    $router->get('/create', [PatchController::class, 'create'])->name('patches.create');
+    $router->post('/store', [PatchController::class, 'store'])->name('patches.store');
+    $router->get('/edit/{id}', [PatchController::class, 'edit'])->name('patches.edit');
+    $router->post('/update', [PatchController::class, 'update'])->name('patches.update');
+    $router->get('/delete/{id}', [PatchController::class, 'delete'])->name('patches.delete');
+});

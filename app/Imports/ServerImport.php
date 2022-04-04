@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Server;
+use App\Models\Site;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithStartRow;
@@ -29,6 +30,12 @@ class ServerImport implements OnEachRow, WithStartRow
         $model->content_view = $row[8];
         $model->registered = Carbon::createFromFormat('Y-m-d H:i:s e', $row[9]);
         $model->last_checkin = Carbon::createFromFormat('Y-m-d H:i:s e', $row[10]);
+        $site_name = $row[11];
+        if ($site_name) {
+            $site = Site::where('name', $site_name)->first();
+            if (!$site) $site = Site::create(['name' => $site_name]);
+            $model->site_id = $site->id;
+        }
 
         $model->save();
     }

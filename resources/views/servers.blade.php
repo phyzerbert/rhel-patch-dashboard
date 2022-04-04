@@ -7,7 +7,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <div class="d-flex">
-                            <h4 class="mb-0">Servers @if ($os) - {{$os}} @endif</h4>
+                            <h4 class="mb-0"><i class="fa fa-server"></i> Servers @if ($os) - {{$os}} @endif</h4>
                             <form action="" method="post" class="d-flex ms-auto">
                                 @csrf
                                 <div style="width: 150px;">
@@ -44,14 +44,7 @@
                                             <td class="font-weight-normal text-sm">{{$item->installable_updates_package_count}}</td>
                                             <td class="font-weight-normal text-sm">{{$item->application->packages_installed ?? 0}}</td>
                                             <td class="font-weight-normal text-sm">{{$lastInstalledDate}}</td>
-                                            <td class="py-2">
-                                                <select class="form-control form-control-sm site-selector" data-server="{{$item->id}}">
-                                                    <option value="" hidden>Select Site</option>
-                                                    @foreach ($sites as $site)
-                                                        <option value="{{$site->id}}" @if($item->site_id == $site->id) selected @endif>{{$site->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
+                                            <td class="font-weight-normal text-sm">{{$item->site->name ?? ''}}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -82,18 +75,6 @@
         // });
 
         $(document).ready(function () {
-            $(document).on("change", ".site-selector", function () {
-                $.ajax({
-                    url: "{{route('servers.change_site')}}",
-                    data: {server_id: $(this).data('server'), site_id: $(this).val()},
-                    type: 'POST',
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log('Success')
-                    }
-                });
-            })
-
             $("#btn-reset").click(function(){
                 $("#search_site").val('');
             });

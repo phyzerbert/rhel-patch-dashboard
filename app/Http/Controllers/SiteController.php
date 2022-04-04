@@ -16,20 +16,4 @@ class SiteController extends Controller
         $data = Site::all();
         return view('sites', compact('data'));
     }
-
-    public function save(Request $request) {
-        $model = Site::create(['name' => $request->get('name')]);
-        return back()->with('success', 'Created successfully');
-    }
-
-    public function update(Request $request) {
-        $model = Site::find($request->get('id'));
-        $model->update(['name' => $request->get('name')]);
-        return back()->with('success', 'Updated successfully');
-    }
-
-    public function delete($id) {
-        Site::destroy($id);
-        return back()->with('success', 'Deleted successfully');
-    }
 }

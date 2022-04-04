@@ -22,6 +22,8 @@
     <link href="{{ asset('assets/css/argon-dashboard.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+
     @yield('style')
 </head>
 <body class="g-sidenav-show bg-gray-100">
