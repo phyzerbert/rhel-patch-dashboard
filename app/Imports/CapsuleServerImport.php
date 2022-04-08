@@ -28,7 +28,7 @@ class CapsuleServerImport implements OnEachRow, WithStartRow
             'patching_schedule' => $row[10],
             'location' => $row[11],
         ];
-        $model = CapsuleServer::findOrCreate($data);
+        $model = CapsuleServer::firstOrCreate($data);
         $model->save();
 
     }

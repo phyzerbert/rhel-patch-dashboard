@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\CapsuleServer;
+use App\Models\Cve;
+use App\Models\PatchInstallDate;
+use App\Models\Rpm;
 use App\Models\Server;
 use App\Models\Site;
+use App\Models\SiteCodeSubnet;
 use App\Models\Timeline;
 use Illuminate\Http\Request;
 
@@ -65,5 +70,30 @@ class HomeController extends Controller
         $server = Server::find($request->get('server_id'));
         $server->update(['site_id' => $request->get('site_id')]);
         return response()->json($server);
+    }
+
+    public function capsuleServers(Request $request) {
+        $data = CapsuleServer::all();
+        return view('capsule_servers', compact('data'));
+    }
+
+    public function siteCodeSubnets(Request $request) {
+        $data = SiteCodeSubnet::all();
+        return view('site_code_subnets', compact('data'));
+    }
+
+    public function cveList(Request $request) {
+        $data = Cve::all();
+        return view('cve', compact('data'));
+    }
+
+    public function cvePatchInstalledDates(Request $request) {
+        $data = PatchInstallDate::all();
+        return view('patch_installed_dates', compact('data'));
+    }
+
+    public function cveRpm(Request $request) {
+        $data = Rpm::all();
+        return view('rpm', compact('data'));
     }
 }

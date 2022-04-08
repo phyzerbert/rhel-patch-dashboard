@@ -24,9 +24,8 @@ class SiteCodeSubnetImport implements OnEachRow, WithStartRow
             'sub_net' => $row[6],
             'vlan_tag' => $row[7],
         ];
-        $model = SiteCodeSubnet::findOrCreate($data);
+        $model = SiteCodeSubnet::firstOrCreate($data);
         $model->save();
-
     }
 
     public function startRow(): int

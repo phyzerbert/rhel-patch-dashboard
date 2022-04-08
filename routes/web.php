@@ -27,12 +27,20 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::any('/servers', [HomeController::class, 'servers'])->name('servers');
 Route::post('/servers/change_site', [HomeController::class, 'changeServerSite'])->name('servers.change_site');
+Route::get('/capsule_servers', [HomeController::class, 'capsuleServers'])->name('capsule_servers');
+Route::get('/site_code_subnets', [HomeController::class, 'siteCodeSubnets'])->name('site_code_subnets');
+Route::get('/cve', [HomeController::class, 'cveList'])->name('cve');
+Route::get('/cve/patch_installed_dates', [HomeController::class, 'cvePatchInstalledDates'])->name('cve.patch_installed_dates');
+Route::get('/cve/rpm', [HomeController::class, 'cveRPM'])->name('cve.rpm');
 
 Route::get('/import', [CsvController::class, 'import'])->name('import');
 Route::post('/import/servers', [CsvController::class, 'importServers'])->name('import.servers');
 Route::post('/import/packages_installed', [CsvController::class, 'importPackagesInstalled'])->name('import.packages_installed');
 Route::post('/import/timeline', [CsvController::class, 'importTimeline'])->name('import.timeline');
 Route::post('/import/sites', [CsvController::class, 'importSites'])->name('import.sites');
+Route::post('/import/capsule_servers', [CsvController::class, 'importCapsuleServers'])->name('import.capsule_servers');
+Route::post('/import/site_code_subnets', [CsvController::class, 'importSiteCodeSubnets'])->name('import.site_code_subnets');
+Route::post('/import/cve_data', [CsvController::class, 'importCveData'])->name('import.cve_data');
 
 Route::get('/sites', [SiteController::class, 'index'])->name('sites');
 

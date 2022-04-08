@@ -62,6 +62,48 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>Capsule Servers</h3>
+                        <form action="{{route('import.capsule_servers')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <input class="form-control" name="file" type="file" accept=".csv" required  />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Import</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>Site Code Subnets</h3>
+                        <form action="{{route('import.site_code_subnets')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <input class="form-control" name="file" type="file" accept=".csv" required  />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Import</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3>CVE Data</h3>
+                        <form action="{{route('import.cve_data')}}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <input class="form-control" name="file" type="file" accept=".zip" required  />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Import</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
