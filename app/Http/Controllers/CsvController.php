@@ -15,6 +15,7 @@ use App\Models\Server;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Excel;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Zip;
 
@@ -73,6 +74,7 @@ class CsvController extends Controller
     }
 
     public function importCveData(Request $request) {
+        File::ensureDirectoryExists('/storage/app/public/cve');
         ini_set('max_execution_time', 0);
         $files = Storage::disk('public')->allFiles('cve');
         Storage::disk('public')->delete($files);
@@ -97,36 +99,39 @@ class CsvController extends Controller
             switch ($file_type) {
                 case 'rpm':
                     foreach ($file_content as $value) {
-                        Rpm::create([
+                        $model = Rpm::firstOrCreate([
                             'server_id' => $server ? $server->id : null,
                             'server_name' => $server_name,
                             'file_date' => $file_date,
                             'value' => $value,
                         ]);
+                        $model->save();
                     }
 
                     break;
 
                 case 'patchinstalldates':
                     foreach ($file_content as $value) {
-                        PatchInstallDate::create([
+                        $model = PatchInstallDate::firstOrCreate([
                             'server_id' => $server ? $server->id : null,
                             'server_name' => $server_name,
                             'file_date' => $file_date,
                             'patch_installed_date' => Carbon::createFromFormat('d M Y', $value)->format('Y-m-d'),
                         ]);
+                        $model->save();
                     }
 
                     break;
 
                 case 'cve':
                     foreach ($file_content as $value) {
-                        Cve::create([
+                        $model = Cve::firstOrCreate([
                             'server_id' => $server ? $server->id : null,
                             'server_name' => $server_name,
                             'file_date' => $file_date,
                             'value' => $value,
                         ]);
+                        $model->save();
                     }
 
                     break;
