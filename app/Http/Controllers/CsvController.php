@@ -74,7 +74,7 @@ class CsvController extends Controller
     }
 
     public function importCveData(Request $request) {
-        File::ensureDirectoryExists('/storage/app/public/cve');
+        // File::ensureDirectoryExists('/storage/app/public/cve');
         ini_set('max_execution_time', 0);
         $files = Storage::disk('public')->allFiles('cve');
         Storage::disk('public')->delete($files);
