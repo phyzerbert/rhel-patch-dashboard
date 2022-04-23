@@ -55,6 +55,7 @@ Route::group(['prefix' => 'events'], function($router) {
 
 Route::group(['prefix' => 'patches'], function($router) {
     $router->get('/', [PatchController::class, 'index'])->name('patches');
+    $router->get('/date_view', [PatchController::class, 'dateView'])->name('patches.date_view');
     $router->get('/create', [PatchController::class, 'create'])->name('patches.create');
     $router->post('/store', [PatchController::class, 'store'])->name('patches.store');
     $router->get('/edit/{id}', [PatchController::class, 'edit'])->name('patches.edit');

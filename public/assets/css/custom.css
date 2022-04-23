@@ -2,3 +2,7 @@
     padding: 0.5rem;
     font-size: 14.4px;
 }
+
+.fc-h-event .fc-event-title-container {
+    cursor: pointer;
+}

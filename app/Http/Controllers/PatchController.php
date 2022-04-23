@@ -36,13 +36,25 @@ class PatchController extends Controller
         $patches = [];
         $initialDate = date('Y-m-d');
         foreach (Patch::all() as $item) {
+            $className = 'bg-primary';
+            if ($item->status == 'Successful' || $item->status == 'Successful with Issues')
+                $className = 'bg-success';
+            if ($item->status == 'Failed')
+                $className = 'bg-danger';
             $patches[] = [
                 'title' => $item->title,
                 'start' => $item->date,
                 'end' => $item->date,
+                'className' => $className,
             ];
         }
         return view('patches.calendar', compact('patches', 'initialDate'));
+    }
+
+    public function dateView(Request $request) {
+        $date = $request->get('date');
+        $data = Patch::where('date', $date)->paginate(10);
+        return view('patches.date_view', compact('data', 'date'));
     }
 
     public function create() {

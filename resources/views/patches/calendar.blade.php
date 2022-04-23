@@ -20,6 +20,7 @@
 @endsection
 @section('script')
     <script src="{{asset('assets/js/plugins/fullcalendar.min.js')}}"></script>
+    <script src="{{asset('assets/js/plugins/moment.min.js')}}"></script>
     <script>
         var calendar = new FullCalendar.Calendar(document.getElementById("calendar-patchess"), {
             contentHeight: 'auto',
@@ -55,6 +56,11 @@
                     }
                 }
             },
+            eventClick(info) {
+                let date = moment(info.event.start).format('YYYY-MM-DD')
+                console.log(date)
+                window.location.href = `/patches/date_view?date=${date}`
+            }
         });
 
     calendar.render();
