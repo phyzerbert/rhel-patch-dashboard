@@ -29,6 +29,9 @@
         .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
             display: none !important;
         }
+        .fc-daygrid-day-number {
+            cursor: pointer;
+        }
     </style>
 @endsection
 
@@ -232,6 +235,10 @@
             eventDidMount: function (info) {
                 var dateString = moment(info.event.start).format('YYYY-MM-DD');
                 $('.fc-day[data-date="' + dateString + '"]').css('background-color', info.backgroundColor);
+            },
+            dateClick(info) {
+                let date = moment(info.dateStr).format('YYYY-MM-DD')
+                window.location.href = `/patches/date_view?date=${date}`
             }
         });
 
