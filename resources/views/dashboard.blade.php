@@ -21,9 +21,14 @@
         #table-filesystem td.value {
             width: 50px;
         }
-
+        .nav-link-server {
+            padding: 3px 5px;
+        }
         .nav-link-server.active {
             font-weight: bold;
+            color: #FFF;
+            background-color: #2dce89;
+            border-radius: 3px;
         }
 
         /* .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
