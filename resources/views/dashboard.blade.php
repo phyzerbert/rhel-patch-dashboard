@@ -196,50 +196,46 @@
     <script>
         var calendar_data = [];
 
-        function renderCalendar() {
-            var calendar = new FullCalendar.Calendar(document.getElementById("calendar-patches"), {
-                contentHeight: 'auto',
-                initialView: "dayGridMonth",
-                headerToolbar: {
-                    start: '',
-                    center: 'title',
-                    end: ''
-                },
-                selectable: true,
-                editable: false,
-                events: calendar_data,
-                views: {
-                    month: {
-                        titleFormat: {
-                            month: "long",
-                            year: "numeric"
-                        }
-                    },
-                    agendaWeek: {
-                        titleFormat: {
-                            month: "long",
-                            year: "numeric",
-                            day: "numeric"
-                        }
-                    },
-                    agendaDay: {
-                        titleFormat: {
-                            month: "short",
-                            year: "numeric",
-                            day: "numeric"
-                        }
+        var calendar = new FullCalendar.Calendar(document.getElementById("calendar-patches"), {
+            contentHeight: 'auto',
+            initialView: "dayGridMonth",
+            headerToolbar: {
+                start: '',
+                center: 'title',
+                end: ''
+            },
+            selectable: true,
+            editable: false,
+            events: calendar_data,
+            views: {
+                month: {
+                    titleFormat: {
+                        month: "long",
+                        year: "numeric"
                     }
                 },
-                eventDidMount: function (info) {
-                    console.log(info.backgroundColor)
-                    var dateString = moment(info.event.start).format('YYYY-MM-DD');
-                    $('.fc-day[data-date="' + dateString + '"]').css('background-color', info.backgroundColor);
-                    // $('.fc-day[data-date="' + dateString + '"]').hide();
+                agendaWeek: {
+                    titleFormat: {
+                        month: "long",
+                        year: "numeric",
+                        day: "numeric"
+                    }
+                },
+                agendaDay: {
+                    titleFormat: {
+                        month: "short",
+                        year: "numeric",
+                        day: "numeric"
+                    }
                 }
-            });
+            },
+            eventDidMount: function (info) {
+                var dateString = moment(info.event.start).format('YYYY-MM-DD');
+                $('.fc-day[data-date="' + dateString + '"]').css('background-color', info.backgroundColor);
+            }
+        });
 
-            calendar.render();
-        }
+        calendar.render();
         // $(document).ready(function () {
             $("#button_selected_server").click(function() {
                 let server_id = $("#selected_server_id").val();
@@ -251,7 +247,11 @@
                     dataType: 'json',
                     success(data) {
                         calendar_data = data;
-                        renderCalendar();
+
+                        $('.fc-day').css('background-color', 'unset');
+                        calendar.removeAllEvents();
+                        calendar.addEventSource(calendar_data)
+                        calendar.refetchEvents();
                     }
                 })
             })

@@ -17,8 +17,7 @@ class ServerImport implements OnEachRow, WithStartRow
     public function onRow(Row $row)
     {
         $name = $row[0];
-        $model = Server::where('name', $name)->first();
-        if (!$model) $model = Server::create(['name' => $name]);
+        $model = Server::firstOrCreate(['name' => $name]);
 
         $model->subscription_status = $row[1];
         $model->installable_updates_security = $row[2];
