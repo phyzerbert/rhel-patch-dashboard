@@ -26,12 +26,12 @@
             font-weight: bold;
         }
 
-        .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+        /* .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
             display: none !important;
-        }
-        .fc-daygrid-day-number {
+        } */
+        /* .fc-daygrid-day-number {
             cursor: pointer;
-        }
+        } */
     </style>
 @endsection
 
@@ -203,9 +203,9 @@
             contentHeight: 'auto',
             initialView: "dayGridMonth",
             headerToolbar: {
-                start: '',
-                center: 'title',
-                end: ''
+                start: 'title', // will normally be on the left. if RTL, will be on the right
+                center: '',
+                end: 'today prev,next' // will normally be on the right. if RTL, will be on the left
             },
             selectable: true,
             editable: false,
@@ -232,14 +232,18 @@
                     }
                 }
             },
-            eventDidMount: function (info) {
-                var dateString = moment(info.event.start).format('YYYY-MM-DD');
-                $('.fc-day[data-date="' + dateString + '"]').css('background-color', info.backgroundColor);
-            },
-            dateClick(info) {
-                let date = moment(info.dateStr).format('YYYY-MM-DD')
+            // eventDidMount: function (info) {
+            //     var dateString = moment(info.event.start).format('YYYY-MM-DD');
+            //     $('.fc-day[data-date="' + dateString + '"]').css('background-color', info.backgroundColor);
+            // },
+            eventClick(info) {
+                let date = moment(info.event.start).format('YYYY-MM-DD')
                 window.location.href = `/patches/date_view?date=${date}`
             }
+            // dateClick(info) {
+            //     let date = moment(info.dateStr).format('YYYY-MM-DD')
+            //     window.location.href = `/patches/date_view?date=${date}`
+            // }
         });
 
         calendar.render();
