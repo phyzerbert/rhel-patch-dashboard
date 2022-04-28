@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\App;
 use App\Models\Application;
 use App\Models\CapsuleServer;
 use App\Models\Cve;
@@ -104,10 +105,9 @@ class HomeController extends Controller
 
     public function getSites(Request $request) {
         $sites = Site::all();
-        foreach ($sites as $site) {
-            $site->apps = $site->apps()->with('servers')->get();
-        }
-        return response()->json($sites);
+        $apps = App::all();
+        $servers = Server::all();
+        return response()->json(compact('sites', 'apps', 'servers'));
     }
 
     public function getServerPatchesCalendarData(Request $request) {

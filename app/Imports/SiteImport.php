@@ -15,13 +15,7 @@ class SiteImport implements OnEachRow
     */
     public function onRow(Row $row)
     {
-        $server_name = $row[0];
-        $server = Server::where('name', $server_name)->first();
-        if ($server) {
-            $site = Site::where('name', $row[1])->first();
-            if (!$site)  $site = Site::create(['name' => $row[1]]);
-            $server->update(['site_id' => $site->id]);
-        }
-
+        $site = Site::firstOrCreate(['name' => $row[0]]);
+        $site->save();
     }
 }

@@ -16,7 +16,6 @@ class CreateAppsTable extends Migration
         Schema::create('apps', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->integer('site_id')->nullable();
         });
     }
 

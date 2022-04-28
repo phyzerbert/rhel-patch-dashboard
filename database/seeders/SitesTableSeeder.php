@@ -16,18 +16,26 @@ class SitesTableSeeder extends Seeder
      */
     public function run()
     {
+
+        $apps = ['Splunk', 'CCard', 'ESP', 'Konami', 'Mobile App', 'Openshift', 'Streaming', 'Tower', 'VendorPay', 'Capsule'];
+
+        foreach ($apps as $item) {
+            App::create(['name' => $item]);
+        }
+        $server_index = 1;
         for ($i = 1; $i <= 30; $i++) {
             $site = Site::create(['name' => "Site$i"]);
-            for ($j = 1; $j <= 10; $j++) {
-                $app_index = ($i - 1) * 10 + $j;
-                $app = App::create(['name' => "App$app_index", 'site_id' => $site->id]);
+            $j = 1;
+            foreach (App::all() as $app) {
                 for ($k=1; $k <= 5; $k++) {
-                    $server_index = ($i - 1) * 10 + ($j - 1) * 5 + $k;
                     $server = Server::create([
-                        'name' => "Server$server_index",
+                        'name' => "Server".$server_index,
                         'app_id' => $app->id,
+                        'site_id' => $site->id,
                     ]);
+                    $server_index++;
                 }
+                $j++;
             }
         }
     }

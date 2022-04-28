@@ -48,13 +48,13 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th v-for="app in selected_site.apps">@{{app.name}}</th>
+                                        <th v-for="app in apps">@{{app.name}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td v-for="app in selected_site.apps">
-                                            <div class="server mb-2" v-for="server in app.servers">
+                                        <td v-for="app in apps">
+                                            <div class="server mb-2" v-for="server in servers.filter(i => i.site_id == selected_site_id && i.app_id == app.id)">
                                                 <a href="javascript:;" class="nav-link-server" :class="{active: selected_server.id == server.id}" @click.prevent="selected_server = server">@{{server.name}}</a>
                                             </div>
                                         </td>

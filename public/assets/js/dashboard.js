@@ -3,6 +3,8 @@ var app = new Vue({
 
     data: {
         sites: [],
+        apps: [],
+        servers: [],
         selected_site_id: '',
         selected_site: null,
         selected_server: null,
@@ -27,9 +29,12 @@ var app = new Vue({
     methods:{
         init() {
             axios.get('/get_sites').then(response => {
-                this.sites = response.data
+                this.sites = response.data.sites
+                this.apps = response.data.apps
+                this.servers = response.data.servers
                 this.selected_site_id = this.sites[0].id
-                this.selected_server = this.sites[0].apps[0].servers[0]
+                let site_servers = this.servers.filter(i => i.site_id == this.selected_site_id)
+                this.selected_server = site_servers[0];
             })
         },
         getGroupPatchStatus() {

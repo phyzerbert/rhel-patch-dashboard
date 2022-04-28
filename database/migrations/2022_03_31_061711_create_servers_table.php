@@ -26,6 +26,7 @@ class CreateServersTable extends Migration
             $table->string('content_view')->nullable();
             $table->timestamp('registered')->nullable();
             $table->timestamp('last_checkin')->nullable();
+            $table->integer('site_id')->nullable();
             $table->integer('app_id')->nullable();
             $table->timestamps();
         });
