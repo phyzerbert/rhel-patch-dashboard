@@ -25,6 +25,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 Route::any('/servers', [HomeController::class, 'servers'])->name('servers');
 Route::post('/servers/change_site', [HomeController::class, 'changeServerSite'])->name('servers.change_site');
 Route::get('/capsule_servers', [HomeController::class, 'capsuleServers'])->name('capsule_servers');
@@ -62,3 +63,7 @@ Route::group(['prefix' => 'patches'], function($router) {
     $router->post('/update', [PatchController::class, 'update'])->name('patches.update');
     $router->get('/delete/{id}', [PatchController::class, 'delete'])->name('patches.delete');
 });
+
+Route::get('/get_sites', [HomeController::class, 'getSites']);
+Route::post('/get_server_patches_calendar_data', [HomeController::class, 'getServerPatchesCalendarData']);
+Route::post('/get_group_patch_status', [HomeController::class, 'getGroupPatchStatus']);

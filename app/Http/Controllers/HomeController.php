@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\CapsuleServer;
 use App\Models\Cve;
+use App\Models\Patch;
 use App\Models\PatchInstallDate;
 use App\Models\Rpm;
 use App\Models\Server;
@@ -51,6 +52,10 @@ class HomeController extends Controller
         return view('home', compact('servers', 'inventory_servers', 'os_array', 'inventory_count', 'server_array', 'application_count', 'timelines'));
     }
 
+    public function dashboard() {
+        return view('dashboard');
+    }
+
     public function servers(Request $request) {
         $site_id = $request->get('site_id');
         $os = $request->get('os');
@@ -95,5 +100,56 @@ class HomeController extends Controller
     public function cveRpm(Request $request) {
         $data = Rpm::all();
         return view('rpm', compact('data'));
+    }
+
+    public function getSites(Request $request) {
+        $sites = Site::all();
+        foreach ($sites as $site) {
+            $site->apps = $site->apps()->with('servers')->get();
+        }
+        return response()->json($sites);
+    }
+
+    public function getServerPatchesCalendarData(Request $request) {
+        $server_id = $request->get('server_id');
+        $patches = [];
+        foreach (Patch::where('server_id', $server_id)->get() as $item) {
+            $className = 'bg-primary';
+            $backgroundColor = '#2643e9';
+            if ($item->status == 'Successful' || $item->status == 'Successful with Issues') {
+                $className = 'bg-success';
+                $backgroundColor = '#1aae6f';
+            } else if ($item->status == 'Failed') {
+                $className = 'bg-danger';
+                $backgroundColor = '#f80031';
+            }
+
+            $patches[] = [
+                'title' => $item->title,
+                'start' => $item->date,
+                'end' => $item->date,
+                'className' => $className,
+                'backgroundColor' => $backgroundColor,
+            ];
+        }
+        return response()->json($patches);
+    }
+
+    public function getGroupPatchStatus(Request $request) {
+        $site_id = $request->get('site_id');
+        $servers = Patch::where('site_id', $site_id)->distinct()->pluck('server_id');
+        $data = [];
+        foreach ($servers as $server_id) {
+            $server = Server::find($server_id);
+            if (!$server) continue;
+            $data[] = [
+                'server_name' => $server->name,
+                'installable' => Patch::where('server_id', $server_id)->whereNotIn('status', ['Successful', 'Successful with Issues', 'Failed'])->count(),
+                'installed' => Patch::where('server_id', $server_id)->whereIn('status', ['Successful', 'Successful with Issues'])->count(),
+                'failed' => Patch::where('server_id', $server_id)->whereIn('status', ['Failed'])->count(),
+            ];
+        }
+
+        return response()->json($data);
     }
 }

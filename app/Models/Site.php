@@ -10,7 +10,7 @@ class Site extends Model
 
     public $timestamps = false;
 
-    public function servers() {
-        return $this->hasMany(Server::class);
+    public function apps() {
+        return $this->hasMany(App::class);
     }
 }
