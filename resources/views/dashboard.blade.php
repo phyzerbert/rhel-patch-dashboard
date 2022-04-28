@@ -148,9 +148,9 @@
 
                                         <h6 class="mt-3">Status</h6>
                                         <div class="d-flex justify-content-between">
-                                            <span class="badge badge-success">Good</span>
-                                            <span class="badge badge-primary">Pending</span>
-                                            <span class="badge badge-danger">Failed</span>
+                                            <span class="badge bg-success">Good</span>
+                                            <span class="badge bg-primary">Pending</span>
+                                            <span class="badge bg-danger">Failed</span>
                                         </div>
                                     </div>
                                 </div>
