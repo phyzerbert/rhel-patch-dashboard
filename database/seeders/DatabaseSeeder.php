@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456'),
         ]);
+
+        $this->call(SitesTableSeeder::class);
     }
 }
