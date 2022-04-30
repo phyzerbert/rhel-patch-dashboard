@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CbdController;
 use App\Http\Controllers\CsvController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
@@ -33,6 +34,11 @@ Route::get('/site_code_subnets', [HomeController::class, 'siteCodeSubnets'])->na
 Route::get('/cve', [HomeController::class, 'cveList'])->name('cve');
 Route::get('/cve/patch_installed_dates', [HomeController::class, 'cvePatchInstalledDates'])->name('cve.patch_installed_dates');
 Route::get('/cve/rpm', [HomeController::class, 'cveRPM'])->name('cve.rpm');
+
+Route::group(['prefix' => 'cbd'], function($router) {
+    $router->get('/', [CbdController::class, 'index'])->name('cbd');
+    $router->post('/import', [CbdController::class, 'import'])->name('cbd.import');
+});
 
 Route::get('/import', [CsvController::class, 'import'])->name('import');
 Route::post('/import/servers', [CsvController::class, 'importServers'])->name('import.servers');
