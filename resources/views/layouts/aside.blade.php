@@ -114,14 +114,6 @@
                     </ul>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link @if(strpos($route, 'cbd') !== false) active @endif" href="{{route('cbd')}}">
-                    <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-list text-dark text-sm"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">CBD</span>
-                </a>
-            </li>
         </ul>
     </div>
 </aside>
