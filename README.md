@@ -1,6 +1,10 @@
 ## Installation Instructions
 
 - Extract the project zip file
+- Change the ownership of the Laravel directory to the webserver user and also the permissions:
+    - sudo chown -R www-data:www-data /home/ubuntu/rhel-patch-dashboard
+    - sudo chmod -R 775 /home/ubuntu/rhel-patch-dashboard/storage
+
 - Create a MySQL database for the project
     - mysql -u root -p
     - create database rhel;
