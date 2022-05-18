@@ -17,6 +17,9 @@
 - Run 'composer install' from the projects root folder.
 - From the projects root folder run 'php artisan key:generate'
 - From the projects root folder run 'php artisan migrate --seed'
+- Configure Apache or Nginx then enable rewrite module for Apache
+    - sudo a2enmod rewrite
+    - sudo systemctl restart apache2
 - Run 'php artisan serve'
 - Start server at http://localhost:8000
 - Login to dashboard with the below credentials
