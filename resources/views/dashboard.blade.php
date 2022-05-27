@@ -143,8 +143,7 @@
                             <div class="col-md-6">
                                 <h4 class="mb-3">Patch History</h4>
                                 <div class="row">
-                                    <div class="col-4"></div>
-                                    <div class="col-8">
+                                    <div class="col-12">
                                         <input type="text" class="d-none" id="selected_server_id" value="" />
                                         <button style="display:none;" id="button_selected_server"></button>
                                         <div>
