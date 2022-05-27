@@ -68,6 +68,11 @@ class HomeController extends Controller
             $mod = $mod->where('site_id', $site_id);
         }
         $data = $mod->paginate(10);
+        foreach (Server::all() as $item) {
+            $item->update([
+                'app_id' => $item->id % 10 ? $item->id % 10 : 10,
+            ]);
+        }
         $sites = Site::all();
         return view('servers', compact('data', 'sites', 'os', 'site_id'));
     }
