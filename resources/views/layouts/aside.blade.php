@@ -29,14 +29,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if($route == 'import') active @endif" href="{{route('import')}}">
-                    <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-file-csv text-dark text-sm"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Import CSV</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link @if($route == 'servers') active @endif" href="{{route('servers')}}">
                     <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-server text-dark text-sm"></i>
@@ -113,6 +105,14 @@
                         </li>
                     </ul>
                 </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @if($route == 'import') active @endif" href="{{route('import')}}">
+                    <div class="icon icon-shape icon-sm text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-file-csv text-dark text-sm"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Import CSV</span>
+                </a>
             </li>
         </ul>
     </div>

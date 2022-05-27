@@ -21,7 +21,7 @@
                                     @foreach ($data as $item)
                                         <tr>
                                             <td class="font-weight-normal text-sm" style="width: 80px;">{{$loop->index + 1}}</td>
-                                            <td class="font-weight-normal text-sm name">{{$item->name}}</td>
+                                            <td class="font-weight-normal text-sm name"><a href="{{route('servers') . '?site_id=' . $item->id}}">{{$item->name}}</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
