@@ -163,7 +163,29 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-lg-12 mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12"><h3 class="text-center mb-n4">Compliancy</h3></div>
+                            <div class="col-md-4">
+                                <div id="chart_os" style="height: 400px;"></div>
+                                <h6 class="text-center mt-n5">Operating System</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="chart_installed" style="height: 400px;"></div>
+                                <h6 class="text-center mt-n5">Patches Installed</h6>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="chart_vulnerability" style="height: 400px;"></div>
+                                <h6 class="text-center mt-n5">Vulnerability Remediated</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
                 <div class="card mt-4">
                     <div class="card-body">
                         <h4>Group Patch Status</h4>
@@ -201,6 +223,7 @@
     <script src="{{asset('assets/js/plugins/fullcalendar.min.js')}}"></script>
     <script src="{{asset('assets/js/plugins/moment.min.js')}}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/plugins/echarts/echarts.min.js') }}"></script>
     <script>
         var calendar_data = [];
 
@@ -272,5 +295,101 @@
                 })
             })
         // });
+    </script>
+    <script>
+        var elementOs = document.getElementById('chart_os');
+        var chartOs = echarts.init(elementOs);
+
+        var elementInstalled = document.getElementById('chart_installed');
+        var chartInstalled = echarts.init(elementInstalled);
+
+        var elementVulnerability = document.getElementById('chart_vulnerability');
+        var chartVulnerability = echarts.init(elementVulnerability);
+
+
+        var gaugeOption;
+        gaugeOption = {
+            series: [
+                {
+                    type: 'gauge',
+                    progress: {
+                        show: true,
+                        width: 12
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            width: 12
+                        }
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    splitLine: {
+                        length: 5,
+                        lineStyle: {
+                            width: 2,
+                            color: '#999'
+                        }
+                    },
+                    axisLabel: {
+                        distance: 15,
+                        color: '#999',
+                        fontSize: 15
+                    },
+                    anchor: {
+                        show: true,
+                        showAbove: true,
+                        size: 25,
+                            itemStyle: {
+                            borderWidth: 10
+                        }
+                    },
+                    title: {
+                        show: false
+                    },
+                    detail: {
+                        valueAnimation: true,
+                        fontSize: 30,
+                        offsetCenter: [0, '40%'],
+                        formatter: function (value) {
+                            return value.toFixed(0) + '%';
+                        }
+                    },
+                    data: [
+                        {
+                            value: 70
+                        }
+                    ]
+                }
+            ]
+        };
+
+        var optionOs = gaugeOption;
+        optionOs.series[0].data = [{value: 70}]
+        optionOs && chartOs.setOption(optionOs);
+
+        var optionInstalled = gaugeOption;
+        optionInstalled.series[0].data = [{value: 82}]
+        optionInstalled && chartInstalled.setOption(optionInstalled);
+
+        var optionVulnerability = gaugeOption;
+        optionVulnerability.series[0].data = [{value: 15}]
+        optionVulnerability && chartVulnerability.setOption(optionVulnerability);
+
+        var triggerChartResize = function() {
+            elementOs && chartOs.resize();
+            elementInstalled && chartInstalled.resize();
+            elementVulnerability && chartVulnerability.resize();
+        };
+
+        // On window resize
+        var resizeCharts;
+        window.onresize = function () {
+            clearTimeout(resizeCharts);
+            resizeCharts = setTimeout(function () {
+                triggerChartResize();
+            }, 200);
+        };
+
     </script>
 @endsection
