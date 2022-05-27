@@ -22,21 +22,5 @@ class SitesTableSeeder extends Seeder
         foreach ($apps as $item) {
             App::create(['name' => $item]);
         }
-        // $server_index = 1;
-        // for ($i = 1; $i <= 30; $i++) {
-        //     $site = Site::create(['name' => "Site$i"]);
-        //     $j = 1;
-        //     foreach (App::all() as $app) {
-        //         for ($k=1; $k <= 5; $k++) {
-        //             $server = Server::create([
-        //                 'name' => "Server".$server_index,
-        //                 'app_id' => $app->id,
-        //                 'site_id' => $site->id,
-        //             ]);
-        //             $server_index++;
-        //         }
-        //         $j++;
-        //     }
-        // }
     }
 }

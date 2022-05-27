@@ -16,10 +16,13 @@ class ServerImport implements OnEachRow
     */
     public function onRow(Row $row)
     {
+        $site_name = $row[0];
+        $site = Site::firstOrCreate(['name' => $site_name]);
+        $site->save();
+
         $name = $row[1];
         $model = Server::firstOrCreate(['name' => $name]);
 
-        $model->username = $row[0];
         $model->subscription_status = $row[2];
         $model->installable_updates_security = $row[3];
         $model->installable_updates_bug_fixes = $row[4];
@@ -34,12 +37,8 @@ class ServerImport implements OnEachRow
         $model->value4 = $row[13];
         $model->registered = Carbon::parse($row[14]);
         $model->last_checkin = Carbon::parse($row[15]);
+        $model->site_id = $site->id ?? null;
 
         $model->save();
     }
-
-    // public function startRow(): int
-    // {
-    //     return 2;
-    // }
 }

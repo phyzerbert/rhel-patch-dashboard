@@ -16,7 +16,6 @@ class CreateServersTable extends Migration
         Schema::create('servers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('domain')->nullable();
             $table->string('subscription_status')->nullable();
             $table->string('installable_updates_security')->nullable();
             $table->string('installable_updates_bug_fixes')->nullable();
