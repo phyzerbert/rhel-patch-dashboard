@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <h4 class="mb-0"><i class="fa fa-server"></i> Servers @if ($os) - {{$os}} @endif</h4>
-                            <form action="" method="post" class="d-flex ms-auto">
+                            <form action="{{route('servers')}}" method="post" class="d-flex ms-auto">
                                 @csrf
                                 <div style="width: 150px;">
                                     <select name="site_id" class="form-control form-control-sm" id="search_site">
