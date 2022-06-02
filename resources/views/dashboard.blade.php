@@ -163,6 +163,19 @@
                     </div>
                 </div>
             </div>
+            @php
+                $compliancy_model = \App\Models\Compliancy::first();
+
+                $compliancy_os = 0;
+                $compliancy_installed = 0;
+                $compliancy_vulnerability = 0;
+
+                if ($compliancy_model) {
+                    $compliancy_os = $compliancy_model->operating_system;
+                    $compliancy_installed = $compliancy_model->patches_installed;
+                    $compliancy_vulnerability = $compliancy_model->vulnerability_remediated;
+                }
+            @endphp
             <div class="col-lg-12 mt-4">
                 <div class="card">
                     <div class="card-body">
@@ -356,7 +369,7 @@
                     },
                     data: [
                         {
-                            value: 70
+                            value: "{{ $compliancy_os }}"
                         }
                     ]
                 }
@@ -364,15 +377,15 @@
         };
 
         var optionOs = gaugeOption;
-        optionOs.series[0].data = [{value: 70}]
+        optionOs.series[0].data = [{value: "{{ $compliancy_os }}"}]
         optionOs && chartOs.setOption(optionOs);
 
         var optionInstalled = gaugeOption;
-        optionInstalled.series[0].data = [{value: 82}]
+        optionInstalled.series[0].data = [{value: "{{ $compliancy_installed }}"}]
         optionInstalled && chartInstalled.setOption(optionInstalled);
 
         var optionVulnerability = gaugeOption;
-        optionVulnerability.series[0].data = [{value: 15}]
+        optionVulnerability.series[0].data = [{value: "{{ $compliancy_vulnerability }}"}]
         optionVulnerability && chartVulnerability.setOption(optionVulnerability);
 
         var triggerChartResize = function() {
