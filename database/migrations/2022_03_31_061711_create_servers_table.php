@@ -24,10 +24,6 @@ class CreateServersTable extends Migration
             $table->string('os')->nullable();
             $table->string('environment')->nullable();
             $table->string('content_view')->nullable();
-            $table->decimal('value1', 14, 2)->nullable();
-            $table->decimal('value2', 14, 2)->nullable();
-            $table->integer('value3')->nullable();
-            $table->integer('value4')->nullable();
             $table->timestamp('registered')->nullable();
             $table->timestamp('last_checkin')->nullable();
             $table->integer('site_id')->nullable();
